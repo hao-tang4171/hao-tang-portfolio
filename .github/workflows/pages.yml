@@ -21,6 +21,8 @@ jobs:
           cat site-*.zip-part > "$RUNNER_TEMP/portfolio.zip"
           unzip -q "$RUNNER_TEMP/portfolio.zip" -d site
           test -f site/index.html
+          cp soft-controls.css site/assets/soft-controls.css
+          find site -name "*.html" -exec sed -i "s/soft-controls[.]css?v=[0-9]*/soft-controls.css?v=5/g" {} +
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site

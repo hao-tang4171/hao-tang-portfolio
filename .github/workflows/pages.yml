@@ -20,6 +20,7 @@ jobs:
         run: |
           cat site-*.zip-part > "$RUNNER_TEMP/portfolio.zip"
           unzip -q "$RUNNER_TEMP/portfolio.zip" -d site
+          unzip -oq portfolio-fast-assets.zip -d site
           test -f site/index.html
           cp soft-controls.css site/assets/soft-controls.css
           find site -name "*.html" -exec sed -i "s/soft-controls[.]css?v=[0-9]*/soft-controls.css?v=5/g" {} +
@@ -28,3 +29,4 @@ jobs:
           path: site
       - uses: actions/deploy-pages@v4
         id: deployment
+

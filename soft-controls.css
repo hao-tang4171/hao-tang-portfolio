@@ -1,0 +1,108 @@
+/* Shared raised surfaces for the portfolio and its bundled demos. */
+:root {
+  --soft-surface: var(--paper, #f7f6f2);
+  --soft-ink: #36352f;
+  --soft-shadow-ink: #514a3d;
+  --soft-raised:
+    inset 0 1px 1px #ffffffe6,
+    inset 0 -1px 1px color-mix(in srgb, var(--soft-shadow-ink) 9%, transparent),
+    -5px -5px 12px #ffffffed,
+    2px 3px 4px -2px color-mix(in srgb, var(--soft-shadow-ink) 24%, transparent),
+    5px 8px 14px -3px color-mix(in srgb, var(--soft-shadow-ink) 24%, transparent);
+  --soft-hover:
+    inset 0 1px 1px #fff,
+    inset 0 -1px 1px color-mix(in srgb, var(--soft-shadow-ink) 9%, transparent),
+    -5px -5px 12px #fff,
+    2px 3px 4px -2px color-mix(in srgb, var(--soft-shadow-ink) 25%, transparent),
+    5px 9px 16px -3px color-mix(in srgb, var(--soft-shadow-ink) 30%, transparent);
+  --soft-pressed: inset 2px 3px 6px color-mix(in srgb, var(--soft-shadow-ink) 22%, transparent), inset -3px -3px 7px #ffffffdc;
+}
+.soft-portfolio :is(.art-lightbox, .lightbox, .foodloop-lightbox) {
+  --soft-surface: var(--paper);
+}
+.soft-portfolio .vr-demo { --soft-surface: var(--vr-panel); }
+.soft-reader { --soft-surface: #eaece4; }
+.soft-food {
+  --soft-surface: #f8faf6;
+  --soft-ink: #20392b;
+  --soft-shadow-ink: #40574a;
+}
+.soft-food :is(header, .card) { --soft-surface: #fff; }
+:is(.soft-portfolio, .soft-cemetery, .soft-reader, .soft-food)
+:is(button:not(.flower-button,.open,.brand), .cta, .email, .pill, .case > summary,
+    .foodloop-miro-link, .demo-link, .foot-link, .spatial .text-link) {
+  background: var(--soft-surface);
+  background: linear-gradient(173deg, color-mix(in srgb, var(--soft-surface) 70%, white), var(--soft-surface));
+  border: 0;
+  border-radius: 999px;
+  color: var(--soft-ink);
+  box-shadow: var(--soft-raised);
+  text-decoration: none;
+}
+.soft-portfolio :is(.demo-link,.foot-link,.spatial .text-link) {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 13px;
+}
+.soft-portfolio .art-selection button { padding: 7px 14px; }
+.soft-portfolio .flower-button { filter: drop-shadow(3px 5px 5px #37312730) drop-shadow(-2px -2px 3px #fffaf3a0); }
+.soft-portfolio .flower-button:active { filter: drop-shadow(1px 1px 2px #37312738); }
+.soft-portfolio #garden .garden-flower { filter: none; }
+.soft-food button.open { box-shadow: inset 2px 2px 2px #ffffff80; }
+.soft-food :is(button.primary, .hero > div > button.primary) {
+  background: linear-gradient(173deg, color-mix(in srgb, var(--soft-surface) 70%, white), var(--soft-surface)) !important;
+  color: #183c27 !important;
+  border: 0 !important;
+  box-shadow: var(--soft-raised) !important;
+}
+
+:is(.soft-portfolio, .soft-cemetery, .soft-reader, .soft-food)
+:is(button:not(.flower-button,.open,.brand), .cta, .email, .pill, .case > summary,
+    .foodloop-miro-link, .demo-link, .foot-link, .spatial .text-link):hover {
+  box-shadow: var(--soft-hover);
+  color: var(--soft-ink);
+}
+:is(.soft-portfolio, .soft-cemetery, .soft-reader, .soft-food)
+:is(button:not(.flower-button,.open,.brand), .cta, .email, .pill, .case > summary,
+    .foodloop-miro-link, .demo-link, .foot-link, .spatial .text-link):is(:active,[aria-pressed="true"],[aria-current="page"],.active),
+.soft-portfolio .case[open] > summary,
+.soft-portfolio .foodloop-deck-toggle[aria-expanded="true"] {
+  box-shadow: var(--soft-pressed);
+  background: var(--soft-surface);
+}
+.soft-food button.primary:active { box-shadow: var(--soft-pressed) !important; background: var(--soft-surface) !important; }
+.soft-food button.heart { color: #9c3c32; }
+:is(.soft-portfolio, .soft-cemetery, .soft-reader, .soft-food) button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.foodloop-lightbox {
+  width: min(960px, calc(100% - 24px));
+  max-height: 94dvh;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid #fff;
+  border-radius: 22px;
+  background: var(--paper, #f6f5f1);
+  color: #26231e;
+}
+.foodloop-lightbox[open] { display: flex; flex-direction: column; }
+.foodloop-lightbox::backdrop { background: #22201bbd; backdrop-filter: blur(5px); }
+.foodloop-lightbox-head, .foodloop-lightbox-bar { display: flex; align-items: center; gap: 10px; padding: 5px; }
+.foodloop-lightbox-head { justify-content: space-between; margin-bottom: 10px; }
+.foodloop-lightbox-head h2 { margin: 0; font-size: clamp(15px, 3vw, 20px); line-height: 1.4; }
+.foodloop-lightbox-bar { justify-content: space-between; flex-wrap: wrap; margin-top: 10px; }
+.foodloop-lightbox-actions { display: flex; gap: 8px; }
+.foodloop-lightbox button { flex: none; padding: 8px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.foodloop-lightbox-viewport { overflow: auto; height: 69vh; height: 69dvh; min-height: 0; border-radius: 10px; background: #e9e8e4; overscroll-behavior: contain; }
+.foodloop-lightbox-stage { display: grid; place-items: center; min-width: 100%; min-height: 100%; width: max-content; }
+.foodloop-lightbox-stage img:not([hidden]) { display: block; height: auto; }
+.foodloop-lightbox-stage:has(img[hidden]) { display: none; }
+.foodloop-lightbox-zoom { display: flex; align-items: center; gap: 8px; }
+#foodloop-zoom-hint { color: #5d574d; font-size: 13px; }
+@media (hover: none), (max-width: 540px) { #foodloop-zoom-hint { display: none; } }
+.foodloop-lightbox-status { color: #5d574d; font-size: 13px; }
+
+.foodloop-lightbox-message { margin: 0; padding: 12px; color: #565b66; text-align: center; font-size: 13px; }
